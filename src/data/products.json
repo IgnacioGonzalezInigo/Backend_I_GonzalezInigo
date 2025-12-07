@@ -1,16 +1,5 @@
 [
   {
-    "id": "1",
-    "title": "Teclado",
-    "description": "Teclado mecánico 60%",
-    "code": "KEY-001",
-    "price": 12000,
-    "status": true,
-    "stock": 10,
-    "category": "perifericos",
-    "thumbnails": []
-  },
-  {
     "id": "1765133535046",
     "title": "Mouse",
     "description": "�ptico",

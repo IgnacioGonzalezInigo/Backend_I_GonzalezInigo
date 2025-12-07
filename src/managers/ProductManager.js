@@ -65,6 +65,43 @@ class ProductManager {
         return nuevo;
     }
     
+    async update(id, cambios) {
+        const productos = await this.#leerTodo();
+        const indice = productos.findIndex(p => String(p.id) === String(id));
+        if (indice === -1) throw new Error('Producto no encontrado');
+
+        if ('id' in cambios) delete cambios.id;
+
+        if (cambios.code && productos.some(p => p.code === String(cambios.code) && String(p.id) !== String(id))) {
+            throw new Error('El "code" ingresado ya existe en otro producto');
+        }
+
+        const actual = productos[indice];
+        const actualizado = {
+            ...actual,
+            ...cambios,
+            price: cambios.price !== undefined ? Number(cambios.price) : actual.price,
+            status: cambios.status !== undefined ? Boolean(cambios.status) : actual.status,
+            stock: cambios.stock !== undefined ? Number(cambios.stock) : actual.stock,
+            thumbnails: cambios.thumbnails !== undefined
+            ? (Array.isArray(cambios.thumbnails) ? cambios.thumbnails.map(String) : actual.thumbnails)
+            : actual.thumbnails
+        };
+
+        productos[indice] = actualizado;
+        await this.#escribirTodo(productos);
+        return actualizado;
+    }
+
+    async delete(id) {
+        const productos = await this.#leerTodo();
+        const indice = productos.findIndex(p => String(p.id) === String(id));
+        if (indice === -1) throw new Error('Producto no encontrado');
+        const [eliminado] = productos.splice(indice, 1);
+        await this.#escribirTodo(productos);
+        return eliminado;
+    }
+
 }
 
 module.exports = ProductManager;
