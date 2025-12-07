@@ -1,33 +1,27 @@
 const { Router } = require('express');
+const CartManager = require('../managers/CartManager');
 
 const router = Router();
+const cartManager = new CartManager();
 
-router.get('/', (request, response) => {
-    response.json({
-        status: 'ok',
-        mensaje: 'Listado de carritos (router OK)'
-    });
+router.get('/:cid', async (request, response) => {
+    try {
+        const cartId = request.params.cid;
+        const carrito = await cartManager.getById(cartId);
+        if (!carrito) return response.send({ error: 'Carrito no encontrado' });
+        response.send({ productos: carrito.products });
+    } catch (error) {
+        response.send({ error: error.message });
+    }
 });
 
-router.get('/:cid', (request, response) => {
-    const cartId = request.params.cid;
-
-    response.json({
-        status: 'ok',
-        mensaje: `Productos del carrito ${cartId} (router OK)`
-    });
-});
-
-
-router.post('/:cid/product/:pid', (request, response) => {
-    const cartId = request.params.cid;
-    const productId = request.params.pid;
-
-    response.json({
-        status: 'ok',
-        mensaje: `Producto ${productId} agregado al carrito ${cartId} (router OK)`,
-        cantidad: request.body?.quantity ?? 1
-    });
+router.post('/', async (request, response) => {
+    try {
+        const carrito = await cartManager.create();
+        response.send({ mensaje: 'Carrito creado', carrito });
+    } catch (error) {
+        response.send({ error: error.message });
+    }
 });
 
 module.exports = router;
