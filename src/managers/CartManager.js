@@ -38,6 +38,28 @@ class CartManager {
         const carts = await this.#leerTodo();
         return carts.find(c => String(c.id) === String(cid)) || null;
     }
+
+    async addProduct(cid, pid, quantity = 1) {
+        const carts = await this.#leerTodo();
+        const index = carts.findIndex(c => String(c.id) === String(cid));
+        if (index === -1) throw new Error('Carrito no encontrado');
+
+        const q = Number(quantity || 1);
+        if (!Number.isFinite(q) || q <= 0) throw new Error('La cantidad debe ser mayor a 0');
+
+        const cart = carts[index];
+        const existente = cart.products.find(p => String(p.product) === String(pid));
+
+        if (existente) {
+            existente.quantity = Number(existente.quantity) + q;
+        } else {
+            cart.products.push({ product: String(pid), quantity: q });
+        }
+
+        carts[index] = cart;
+        await this.#escribirTodo(carts);
+        return cart;
+    }
 }
 
 module.exports = CartManager;
