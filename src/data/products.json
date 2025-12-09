@@ -35,5 +35,18 @@
     "stock": 50,
     "category": "audio",
     "thumbnails": []
+  },
+  {
+    "id": "1",
+    "title": "Teclado 60%",
+    "description": "v2",
+    "code": "K60V2",
+    "price": 13999,
+    "status": true,
+    "stock": 8,
+    "category": "peripherals",
+    "thumbnails": [
+      "/imgs/k60.png"
+    ]
   }
 ]
