@@ -36,7 +36,7 @@ class CartManager {
 
     async getById(cid) {
         const carts = await this.#leerTodo();
-        return carts.find(c => String(c.id) === String(cid)) || null;
+        return carts.find(c => String(c.id).trim() === String(cid).trim()) || null;
     }
 
     async addProduct(cid, pid, quantity = 1) {

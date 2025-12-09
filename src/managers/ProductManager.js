@@ -30,7 +30,7 @@ class ProductManager {
 
     async getById(id) {
         const productos = await this.#leerTodo();
-        return productos.find(item => String(item.id) === String(id)) || null;
+        return productos.find(item => String(item.id).trim() === String(id).trim()) || null;
     }
 
     #generarId() {
