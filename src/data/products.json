@@ -1,39 +1,24 @@
 [
   {
-    "id": "1",
-    "title": "Mouse",
-    "description": "�ptico",
-    "code": "MOU-101",
-    "price": 5000,
+    "id": "1767834057149",
+    "title": "Calzon",
+    "description": "Calzon de tela",
+    "code": "Calzon2000",
+    "price": 10000,
     "status": true,
-    "stock": 12,
-    "category": "perifericos",
-    "thumbnails": [
-      "/imgs/mouse.png"
-    ]
+    "stock": 1,
+    "category": "Ropa Interior",
+    "thumbnails": []
   },
   {
-    "id": "1765133602752",
-    "title": "Mouse",
-    "description": "�ptico",
-    "code": "MOU-21",
-    "price": 5000,
+    "id": "1767834094329",
+    "title": "Buzo",
+    "description": "Buzo ligero para el verano",
+    "code": "BUZO1000",
+    "price": 15000,
     "status": true,
-    "stock": 12,
-    "category": "perifericos",
-    "thumbnails": [
-      "/imgs/mouse.png"
-    ]
-  },
-  {
-    "id": "1765134942200",
-    "title": "Auriculares",
-    "description": "In-ear",
-    "code": "EAR-001",
-    "price": 8000,
-    "status": true,
-    "stock": 50,
-    "category": "audio",
+    "stock": 3,
+    "category": "Abrigo",
     "thumbnails": []
   }
 ]

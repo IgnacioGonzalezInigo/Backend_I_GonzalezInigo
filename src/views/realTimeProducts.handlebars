@@ -1,0 +1,63 @@
+<h1>{{title}}</h1>
+
+<form id="productForm">
+  <input type="text" name="title" placeholder="Título" required />
+  <input type="text" name="description" placeholder="Descripción" required />
+  <input type="text" name="code" placeholder="Código" required />
+  <input type="number" name="price" placeholder="Precio" required />
+  <input type="number" name="stock" placeholder="Stock" required />
+  <input type="text" name="category" placeholder="Categoría" required />
+  <button type="submit">Agregar producto</button>
+</form>
+
+<hr />
+
+<div id="productsContainer"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  const form = document.getElementById('productForm');
+
+  function deleteProduct(id) {
+    socket.emit('deleteProduct', id);
+  }
+
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const data = {
+      title: form.title.value,
+      description: form.description.value,
+      code: form.code.value,
+      price: form.price.value,
+      stock: form.stock.value,
+      category: form.category.value,
+      status: true
+    };
+
+    socket.emit('createProduct', data);
+    form.reset();
+  });
+
+  socket.on('productsUpdated', (products) => {
+    const container = document.getElementById('productsContainer');
+
+    if (!products || products.length === 0) {
+      container.innerHTML = '<p>No hay productos cargados.</p>';
+      return;
+    }
+
+    const items = products.map(p => `
+      <li>
+        <strong>${p.title}</strong>
+        — $${p.price}
+        — (id: ${p.id})
+        <button onclick="deleteProduct('${p.id}')">Eliminar</button>
+      </li>
+    `).join('');
+
+    container.innerHTML = `<ul>${items}</ul>`;
+  });
+</script>
