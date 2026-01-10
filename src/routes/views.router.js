@@ -42,4 +42,8 @@ router.get('/realtimeproducts', async (req, res) => {
     }
 });
 
+router.get('/cart', (req, res) => {
+    res.render('cart', { title: 'Tu Carrito' });
+});
+
 module.exports = router;

@@ -37,7 +37,7 @@ body{ background: var(--bg); color: var(--text); }
     letter-spacing: .18em;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 20px;
 }
 
 .hero{
@@ -66,17 +66,13 @@ body{ background: var(--bg); color: var(--text); }
     text-align:center;
     color:#fff;
     padding: 24px;
+  
 }
 
 .hero h1{
     font-weight:600;
     letter-spacing:.02em;
 }
-
-.hero p{
-    
-}
-
 
 .section-title{
     font-size: 12px;
