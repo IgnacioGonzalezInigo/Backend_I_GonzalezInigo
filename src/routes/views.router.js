@@ -7,9 +7,23 @@ const productManager = new ProductManager();
 router.get('/', async (req, res) => {
     try {
         const products = await productManager.getAll();
+
+        const drops = products.map(p => Number(p.drop)).filter(n => Number.isFinite(n));
+        const dropActual = drops.length ? Math.max(...drops) : null;
+
+        const dropProducts = dropActual ? products.filter(p => Number(p.drop) === dropActual) : [];
+        const chunkSize = 3;
+        const dropChunks = [];
+        for (let i = 0; i < dropProducts.length; i += chunkSize) {
+        dropChunks.push(dropProducts.slice(i, i + chunkSize));
+        }
+
         res.render('home', {
-            title: 'Productos',
-            products
+        title: 'Home',
+        products,
+        dropActual,
+        dropProducts,
+        dropChunks
         });
     } catch (error) {
         res.status(500).send(`Error cargando productos: ${error.message}`);

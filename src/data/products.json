@@ -1,100 +1,75 @@
 [
   {
-    "id": "1003",
-    "title": "COLOR FORM TEE / BLACK",
-    "description": "Gráfica a color sobre base negra. El punto de quiebre del drop.",
-    "code": "CLR-TEE-BLK",
-    "price": 45000,
-    "status": true,
-    "stock": 40,
-    "category": "Remeras",
-    "drop": 2026,
-    "thumbnails": [
-      "color-form-tee-black.jpg"
-    ]
-  },
-  {
-    "id": "1004",
-    "title": "COLOR FORM TEE / WHITE",
-    "description": "Color sobre blanco. Equilibrio entre neutralidad y expresión.",
-    "code": "CLR-TEE-WHT",
-    "price": 37000,
-    "status": true,
-    "stock": 40,
-    "category": "Remeras",
-    "drop": 2026,
-    "thumbnails": [
-      "color-form-tee-white.jpg"
-    ]
-  },
-  {
-    "id": "1005",
-    "title": "BAGGY JEAN / LIGHT BLUE",
-    "description": "Silueta amplia. Denim liviano con lavado celeste.",
-    "code": "BG-JEAN-LBL",
-    "price": 72000,
-    "status": true,
+    "id": "1",
+    "title": "Classic Tee Red Pepper",
+    "description": "Remera clásica de algodón con gráfica Red Pepper.",
+    "code": "PS-TS-RED-001",
+    "price": 45,
     "stock": 30,
-    "category": "Jeans",
-    "drop": 2026,
-    "thumbnails": [
-      "baggy-jean-light-blue.jpg"
-    ]
+    "category": "remeras",
+    "status": true,
+    "drop": 1,
+    "thumbnails": ["4.jpg"]
   },
   {
-    "id": "1006",
-    "title": "BAGGY JEAN / BLACK",
-    "description": "Negro sólido. Fit relajado y atemporal.",
-    "code": "BG-JEAN-BLK",
-    "price": 72000,
+    "id": "2",
+    "title": "Tee Carry Pepper",
+    "description": "Remera relaxed fit con ilustración Carry Pepper.",
+    "code": "PS-TS-CARRY-001",
+    "price": 42,
+    "stock": 25,
+    "category": "remeras",
     "status": true,
-    "stock": 30,
-    "category": "Jeans",
-    "drop": 2026,
-    "thumbnails": [
-      "baggy-jean-black.jpg"
-    ]
+    "drop": 1,
+    "thumbnails": ["5.jpg"]
   },
   {
-    "id": "1007",
-    "title": "BAGGY JEAN / GREY",
-    "description": "Gris lavado. Balance entre street y minimal.",
-    "code": "BG-JEAN-GRY",
-    "price": 72000,
+    "id": "3",
+    "title": "Hoodie Be Hot",
+    "description": "Hoodie oversize con estampa trasera Be Hot.",
+    "code": "PS-HD-BEHOT-001",
+    "price": 95,
+    "stock": 15,
+    "category": "buzos",
     "status": true,
-    "stock": 30,
-    "category": "Jeans",
-    "drop": 2026,
-    "thumbnails": [
-      "baggy-jean-grey.jpg"
-    ]
+    "drop": 1,
+    "thumbnails": ["2.jpg"]
   },
   {
-    "id": "1008",
-    "title": "HOODIE OFF / BLACK PINK",
-    "description": "Hoodie pesado. Gráfica OFF en contraste rosa. Statement piece.",
-    "code": "HD-OFF-BPK",
-    "price": 98000,
-    "status": true,
+    "id": "4",
+    "title": "Gorra Pepper Studio",
+    "description": "Gorra de algodón con bordado Pepper Studio.",
+    "code": "PS-CAP-PS-001",
+    "price": 35,
     "stock": 20,
-    "category": "Hoodies",
-    "drop": 2026,
-    "thumbnails": [
-      "hoodie-off-black-pink.jpg"
-    ]
+    "category": "accesorios",
+    "status": true,
+    "drop": 1,
+    "thumbnails": ["1.jpg"]
   },
   {
-    "id": "1009",
-    "title": "ZIP HOODIE / GREY BLACK",
-    "description": "Hoodie con cierre. Gris con detalles negros. Funcional y urbano.",
-    "code": "ZIP-HD-GRB",
-    "price": 105000,
+    "id": "5",
+    "title": "Sweater Pepper Studio",
+    "description": "Sweater tejido con logo Pepper Studio en relieve.",
+    "code": "PS-SW-PS-001",
+    "price": 110,
+    "stock": 10,
+    "category": "sweaters",
     "status": true,
-    "stock": 20,
-    "category": "Hoodies",
-    "drop": 2026,
-    "thumbnails": [
-      "zip-hoodie-grey-black.jpg"
-    ]
+    "drop": 1,
+    "thumbnails": ["6.jpg"]
+  },
+  {
+    "id": "6",
+    "title": "Jean Carry Pepper",
+    "description": "Jean straight fit con gráfica Carry Pepper lateral.",
+    "code": "PS-JN-CARRY-001",
+    "price": 120,
+    "stock": 12,
+    "category": "jeans",
+    "status": true,
+    "drop": 1,
+    "thumbnails": ["3.jpg"]
   }
 ]
+

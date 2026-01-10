@@ -9,7 +9,7 @@ export function alertMsg(alertZone, msg, type = 'danger') {
 
 export function imgSrc(p) {
     return p?.thumbnails?.[0]
-        ? '/img/products/' + p.thumbnails[0]
+        ? '/img/' + p.thumbnails[0]
         : '/img/products/placeholder.jpg';
 }
 
