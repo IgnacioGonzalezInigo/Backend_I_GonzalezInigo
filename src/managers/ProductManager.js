@@ -38,7 +38,7 @@ class ProductManager {
     }
 
     async add(datos) {
-        const requeridos = ['title', 'description', 'code', 'price', 'status', 'stock', 'category'];
+        const requeridos = ['title', 'description', 'code', 'price', 'status', 'stock', 'category', 'drop'];
         for (const campo of requeridos) {
             if (datos[campo] === undefined) throw new Error(`Falta el campo: ${campo}`);
         }
@@ -57,6 +57,7 @@ class ProductManager {
             status: Boolean(datos.status),
             stock: Number(datos.stock),
             category: String(datos.category),
+            drop: Number(datos.drop), // <-- NUEVO
             thumbnails: Array.isArray(datos.thumbnails) ? datos.thumbnails.map(String) : []
         };
 
@@ -83,9 +84,10 @@ class ProductManager {
             price: cambios.price !== undefined ? Number(cambios.price) : actual.price,
             status: cambios.status !== undefined ? Boolean(cambios.status) : actual.status,
             stock: cambios.stock !== undefined ? Number(cambios.stock) : actual.stock,
+            drop: cambios.drop !== undefined ? Number(cambios.drop) : actual.drop, // <-- NUEVO
             thumbnails: cambios.thumbnails !== undefined
-            ? (Array.isArray(cambios.thumbnails) ? cambios.thumbnails.map(String) : actual.thumbnails)
-            : actual.thumbnails
+                ? (Array.isArray(cambios.thumbnails) ? cambios.thumbnails.map(String) : actual.thumbnails)
+                : actual.thumbnails
         };
 
         productos[indice] = actualizado;

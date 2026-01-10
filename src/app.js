@@ -16,6 +16,8 @@ const productManager = new ProductManager();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
@@ -46,7 +48,17 @@ socketServer.on('connection', async (socket) => {
             const updatedProducts = await productManager.getAll();
             socketServer.emit('productsUpdated', updatedProducts);
         } catch (error) {
-            console.error('Error creando producto:', error.message);
+            socket.emit('errorMessage', error.message); // <-- NUEVO
+        }
+    });
+
+    socket.on('updateProduct', async ({ id, changes }) => {
+        try {
+            await productManager.update(id, changes);
+            const updatedProducts = await productManager.getAll();
+            socketServer.emit('productsUpdated', updatedProducts);
+        } catch (error) {
+            socket.emit('errorMessage', error.message); // <-- NUEVO
         }
     });
 
@@ -56,10 +68,9 @@ socketServer.on('connection', async (socket) => {
             const updatedProducts = await productManager.getAll();
             socketServer.emit('productsUpdated', updatedProducts);
         } catch (error) {
-            console.error('Error eliminando producto:', error.message);
+            socket.emit('errorMessage', error.message); // <-- NUEVO
         }
     });
-
 });
 
 httpServer.listen(PORT, () => {

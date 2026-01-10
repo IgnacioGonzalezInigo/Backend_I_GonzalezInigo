@@ -1,63 +1,84 @@
-<h1>{{title}}</h1>
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div>
+      <h1 class="h3 mb-1">PANEL DE CONTROL</h1>
+      <p class="text-muted mb-0">Administración de productos</p>
+    </div>
+    <a class="btn btn-outline-secondary" href="/">Volver a Home</a>
+  </div>
 
-<form id="productForm">
-  <input type="text" name="title" placeholder="Título" required />
-  <input type="text" name="description" placeholder="Descripción" required />
-  <input type="text" name="code" placeholder="Código" required />
-  <input type="number" name="price" placeholder="Precio" required />
-  <input type="number" name="stock" placeholder="Stock" required />
-  <input type="text" name="category" placeholder="Categoría" required />
-  <button type="submit">Agregar producto</button>
-</form>
+  <div id="alertZone"></div>
 
-<hr />
+  <!-- FORM ALTA PRODUCTO -->
+  <div id="createForm" class=" d-none card shadow-sm mb-4">
+    <div class="card-body">
+      <h2 class="h5 mb-3">Agregar producto</h2>
 
-<div id="productsContainer"></div>
+      <form id="productForm" class="row g-2">
+        <div class="col-md-6">
+          <input class="form-control" name="title" placeholder="Título" required>
+        </div>
 
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  const socket = io();
-  const form = document.getElementById('productForm');
+        <div class="col-md-6">
+          <input class="form-control" name="category" placeholder="Categoría" required>
+        </div>
 
-  function deleteProduct(id) {
-    socket.emit('deleteProduct', id);
-  }
+        <div class="col-12">
+          <input class="form-control" name="description" placeholder="Descripción" required>
+        </div>
 
+        <div class="col-md-4">
+          <input class="form-control" name="code" placeholder="Código" required>
+        </div>
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+        <div class="col-md-4">
+          <input class="form-control" name="price" type="number" placeholder="Precio" required>
+        </div>
 
-    const data = {
-      title: form.title.value,
-      description: form.description.value,
-      code: form.code.value,
-      price: form.price.value,
-      stock: form.stock.value,
-      category: form.category.value,
-      status: true
-    };
+        <div class="col-md-4">
+          <input class="form-control" name="stock" type="number" placeholder="Stock" required>
+        </div>
 
-    socket.emit('createProduct', data);
-    form.reset();
-  });
+        <div class="col-md-4">
+          <input class="form-control" name="drop" type="number" placeholder="Drop (ej: 2026)" required>
+        </div>
 
-  socket.on('productsUpdated', (products) => {
-    const container = document.getElementById('productsContainer');
+        <div class="col-md-8">
+          <input class="form-control" name="thumbnail" placeholder="Imagen (ej: remera.jpg)">
+        </div>
 
-    if (!products || products.length === 0) {
-      container.innerHTML = '<p>No hay productos cargados.</p>';
-      return;
-    }
+        <button class="btn btn-dark" type="submit">Agregar</button>
+        <button class="btn btn-outline-secondary" type="button" id="cancelCreate">Cancelar</button>
+      </form>
+    </div>
+  </div>
 
-    const items = products.map(p => `
-      <li>
-        <strong>${p.title}</strong>
-        — $${p.price}
-        — (id: ${p.id})
-        <button onclick="deleteProduct('${p.id}')">Eliminar</button>
-      </li>
-    `).join('');
+  <!-- FORM EDITAR -->
+  <form id="editForm" class="d-none mt-4">
+    <h4>Editar producto</h4>
 
-    container.innerHTML = `<ul>${items}</ul>`;
-  });
-</script>
+    <input type="hidden" name="id">
+
+    <input class="form-control mb-2" name="title" placeholder="Título">
+    <input class="form-control mb-2" name="description" placeholder="Descripción">
+    <input class="form-control mb-2" name="price" type="number" placeholder="Precio">
+    <input class="form-control mb-2" name="stock" type="number" placeholder="Stock">
+    <input class="form-control mb-2" name="drop" type="number" placeholder="Drop">
+    <input class="form-control mb-2" name="thumbnail" placeholder="Imagen">
+
+    <button class="btn btn-dark" type="submit">Guardar cambios</button>
+    <button class="btn btn-outline-secondary" type="button" id="cancelEdit">Cancelar</button>
+  </form>
+
+  <!-- TABLA -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 class="h5 mb-3">Productos</h2>
+        <button id="crearProducto" class="btn btn-sm btn-outline-dark">➕</button>
+      </div>
+      <div id="productsContainer"></div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/js/realtime/eventos.js"></script>

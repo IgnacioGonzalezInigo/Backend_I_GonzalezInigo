@@ -1,15 +1,154 @@
-<h1>{{title}}</h1>
+<div class="hero-wrapper">
 
-{{#if products.length}}
-  <ul>
-    {{#each products}}
-      <li>
-        <strong>{{this.title}}</strong>
-        — ${{this.price}}
-        — (id: {{this.id}})
-      </li>
-    {{/each}}
-  </ul>
-{{else}}
-  <p>No hay productos cargados.</p>
-{{/if}}
+  <div class="brand-nav">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="d-flex gap-3">
+        <a class="brand-link" href="/">Shop</a>
+        <a class="brand-link" href="/lookbook">Lookbook</a>
+        <a class="brand-link" href="/info">Info</a>
+      </div>
+
+      <a class="brand-logo" href="/">OFF STUDIO</a>
+
+      <div class="d-flex gap-3">
+        <a class="brand-link" href="/login">Login</a>
+        <a class="brand-link" href="/cart">Cart</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div style="max-width: 720px;">
+        <div class="section-title mb-2 text-white-50">
+          Drop · Verano 2026
+        </div>
+
+        <h1 class="display-6 mb-2">
+          Timeless essentials, reimagined
+        </h1>
+
+        <a href="#drop" class="btn btn-outline-light">
+          Explora la nueva coleccion
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="container py-5">
+
+  <section id="drop" class="mb-5">
+
+    <div class="d-flex align-items-end justify-content-between mb-3">
+      <div>
+        <div class="section-title">Nuevo!</div>
+        <div class="fw-semibold">DROP VERANO 2026</div>
+      </div>
+
+      <a href="/realtimeproducts" class="text-decoration-none small text-muted">
+        Admin realtime →
+      </a>
+    </div>
+
+    <div class="row g-3">
+      {{#each products}}
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="p-card h-100">
+            <img
+              class="p-img"
+              src="{{#if this.thumbnails.[0]}}{{this.thumbnails.[0]}}{{else}}/img/products/placeholder.jpg{{/if}}"
+              alt="{{this.title}}"
+            >
+
+            <div class="p-body">
+              <p class="p-name">{{this.title}}</p>
+              <div class="p-price">${{this.price}} USD</div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+
+      {{#unless products.length}}
+        <div class="col-12">
+          <div class="alert alert-light border">
+            No hay productos cargados todavía.
+          </div>
+        </div>
+      {{/unless}}
+    </div>
+  </section>
+
+  <section class="mb-5">
+
+    <div class="d-flex align-items-end justify-content-between mb-3">
+      <div>
+        <div class="section-title">lookbook</div>
+        <div class="fw-semibold">SS2026</div>
+      </div>
+
+      <a href="/lookbook" class="text-decoration-none small text-muted">
+        See more →
+      </a>
+    </div>
+
+    <div class="row g-3">
+
+      {{!-- FOTO 1 --}}
+      <div class="col-12 col-lg-6">
+        <div class="tile shadow-sm">
+          <img src="/img/lookbook-1.jpg" alt="Lookbook 1">
+          <div class="tile-label">Limited Edition</div>
+        </div>
+      </div>
+
+      {{!-- FOTO 2 --}}
+      <div class="col-12 col-lg-6">
+        <div class="tile shadow-sm">
+          <img src="/img/lookbook-2.jpg" alt="Lookbook 2">
+          <div class="tile-label">New In</div>
+        </div>
+      </div>
+
+      {{!-- BANNER TEXTO --}}
+      <div class="col-12">
+        <div class="p-card shadow-sm p-4 text-center">
+          <div class="section-title mb-2">SS2026 Lookbook</div>
+
+          <h2 class="h5 mb-2">
+            Built for everyday silhouettes
+          </h2>
+
+          <p class="text-muted mb-3" style="max-width: 720px; margin: 0 auto;">
+            Una colección de básicos con identidad.
+            Relajado, neutro y con contraste gráfico.
+          </p>
+
+          <a href="/lookbook" class="btn btn-dark btn-sm px-4">
+            Open lookbook
+          </a>
+        </div>
+      </div>
+
+      {{!-- FOTO 3 --}}
+      <div class="col-12 col-lg-6">
+        <div class="tile shadow-sm">
+          <img src="/img/lookbook-3.jpg" alt="Lookbook 3">
+          <div class="tile-label">Editorial</div>
+        </div>
+      </div>
+
+      {{!-- FOTO 4 --}}
+      <div class="col-12 col-lg-6">
+        <div class="tile shadow-sm">
+          <img src="/img/lookbook-4.jpg" alt="Lookbook 4">
+          <div class="tile-label">Core</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>

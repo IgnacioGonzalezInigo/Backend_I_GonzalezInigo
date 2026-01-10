@@ -31,7 +31,9 @@ router.get('/:pid', async (request, response) => {
 router.post('/', async (request, response) => {
     try {
         const datos = request.body || {};
-        if (!datos.title || !datos.description || !datos.code || datos.price === undefined || datos.status === undefined || datos.stock === undefined || !datos.category) {
+        if (!datos.title || !datos.description || !datos.code ||
+            datos.price === undefined || datos.status === undefined ||
+            datos.stock === undefined || !datos.category || datos.drop === undefined) {
             return response.send({ error: 'Faltan datos para crear el producto' });
         }
         const producto = await productManager.add(datos);
