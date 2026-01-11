@@ -2,7 +2,8 @@ function money(n) {
     return `$${Number(n || 0)} ARS`;
 }
 
-function alertMsg(zone, msg, type = 'danger') {
+function alertMsg(zone, msg, type = "danger") {
+    if (!zone) return;
     zone.innerHTML = `
         <div class="alert alert-${type} alert-dismissible fade show">
         ${msg}
@@ -15,9 +16,9 @@ function renderEmpty(container) {
     container.innerHTML = `<div class="alert alert-light border mb-0">Tu carrito está vacío.</div>`;
 }
 
-// Storage (NO async)
+// Storage
 function getCartId() {
-    return localStorage.getItem('cid');
+    return localStorage.getItem("cid");
 }
 
 // API
@@ -28,12 +29,23 @@ async function fetchCart(cid) {
     return data.productos || [];
 }
 
+// ACLARACION! Me ayude con IA para resolver un problema que tenia con esta funcion!!
 async function fetchAllProducts() {
     const res = await fetch('/api/products');
     const data = await res.json();
-    return Array.isArray(data) ? data : (data.products || data.payload || []);
+
+    if (Array.isArray(data?.productos)) return data.productos; 
+
+    console.error('Formato inesperado en /api/products:', data);
+    return [];
 }
 
+function getProductKey(p) {
+    const raw = p?.id ?? p?._id ?? p?.pid ?? p?.code;
+    return raw ? String(raw).trim() : null;
+}
+
+// Render
 function renderCart(container, items, productsIndex) {
     if (!items.length) {
         renderEmpty(container);
@@ -42,9 +54,12 @@ function renderCart(container, items, productsIndex) {
 
     const rows = items
         .map((i) => {
-        const key = String(i.product).trim(); // id del producto en el carrito
-        const p = productsIndex.get(key);     // producto completo
-        const title = p?.title ?? `Producto (${key})`;
+        const key = String(i.product).trim();    
+        const p = productsIndex.get(key);         
+        
+        console.log (p)
+        
+        const title = p?.title ?? `Producto no encontrado (id=${key})`;
         const price = Number(p?.price ?? 0);
         const qty = Number(i.quantity ?? 0);
         const subtotal = price * qty;
@@ -87,19 +102,10 @@ function renderCart(container, items, productsIndex) {
         </table>
         </div>
     `;
+    }
 
-}
-
-function getProductKey(p) {
-  // probamos los campos típicos (ajustable)
-    const raw = p?.id ?? p?._id ?? p?.pid ?? p?.code;
-    return raw ? String(raw).trim() : null;
-}
-
-
-// Init -- POO II visto en la facultad
-async function initCartPage() {
-
+    // Init
+    async function initCartPage() {
     const container = document.getElementById("cartContainer");
     const alertZone = document.getElementById("cartAlert");
 
@@ -109,34 +115,30 @@ async function initCartPage() {
     }
 
     try {
-        const cid = await getCartId();
+        const cid = getCartId();
 
         if (!cid) {
-            renderEmpty(container);
+        renderEmpty(container);
         return;
         }
 
-        
         const [items, allProducts] = await Promise.all([
         fetchCart(cid),
         fetchAllProducts(),
         ]);
 
-    
-    const productsIndex = new Map(
-        allProducts
-            .map(p => [getProductKey(p), p])
-            .filter(([k]) => k) 
-    );
+        const productsIndex = new Map(
+        allProducts.map(p => [String(p.id).trim(), p])
+        );
+        console.log(productsIndex)
 
-    renderCart(container, items, productsIndex);
+        renderCart(container, items, productsIndex);
     } catch (err) {
         if (String(err.message).includes("Carrito no encontrado")) {
         localStorage.removeItem("cid");
         }
-
-    alertMsg(alertZone, err.message);
-    renderEmpty(container);
+        alertMsg(alertZone, err.message);
+        renderEmpty(container);
     }
 }
 

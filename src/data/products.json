@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "title": "Classic Tee Red Pepper",
+    "title": "Classic Tee Red Peppper",
     "description": "Remera clásica de algodón con gráfica Red Pepper.",
     "code": "PS-TS-RED-001",
     "price": 35000,
@@ -9,7 +9,9 @@
     "category": "remeras",
     "status": true,
     "drop": 1,
-    "thumbnails": ["4.jpg"]
+    "thumbnails": [
+      "4.jpg"
+    ]
   },
   {
     "id": "2",
@@ -21,7 +23,9 @@
     "category": "remeras",
     "status": true,
     "drop": 1,
-    "thumbnails": ["5.jpg"]
+    "thumbnails": [
+      "5.jpg"
+    ]
   },
   {
     "id": "3",
@@ -33,7 +37,9 @@
     "category": "buzos",
     "status": true,
     "drop": 1,
-    "thumbnails": ["2.jpg"]
+    "thumbnails": [
+      "2.jpg"
+    ]
   },
   {
     "id": "4",
@@ -45,7 +51,9 @@
     "category": "accesorios",
     "status": true,
     "drop": 1,
-    "thumbnails": ["1.jpg"]
+    "thumbnails": [
+      "1.jpg"
+    ]
   },
   {
     "id": "5",
@@ -57,7 +65,9 @@
     "category": "sweaters",
     "status": true,
     "drop": 1,
-    "thumbnails": ["6.jpg"]
+    "thumbnails": [
+      "6.jpg"
+    ]
   },
   {
     "id": "6",
@@ -69,7 +79,8 @@
     "category": "jeans",
     "status": true,
     "drop": 1,
-    "thumbnails": ["3.jpg"]
+    "thumbnails": [
+      "3.jpg"
+    ]
   }
 ]
-
