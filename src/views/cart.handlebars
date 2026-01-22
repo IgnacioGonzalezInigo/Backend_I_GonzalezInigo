@@ -1,19 +1,70 @@
-<div class="container py-5">
-    <div class="d-flex align-items-center justify-content-between mb-3">
-        <div>
-        <h1 class="h3 mb-1">CART</h1>
-        <p class="text-muted mb-0">Tus productos</p>
-        </div>
-        <a class="btn btn-outline-secondary" href="/">Volver</a>
-    </div>
+<div class="hero-wrapper">
+  <div class="brand-nav">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="d-flex gap-3">
+        <a class="brand-link" href="/">Shop</a>
+        <a class="brand-link" href="/products">Products</a>
+      </div>
 
-    <div id="cartAlert"></div>
+      <a class="brand-logo" href="/">PEPPER STUDIO</a>
 
-    <div class="card shadow-sm">
-        <div class="card-body">
-        <div id="cartContainer"></div>
-        </div>
+      <div class="d-flex gap-3">
+        <a class="brand-link" href="/login">Login</a>
+        <a class="brand-link" href="/cart">Cart</a>
+      </div>
     </div>
+  </div>
 </div>
 
-<script type="module" src="/js/cart/cartPage.js"></script>
+<div class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div>
+      <h1 class="h4 mb-1">Carrito</h1>
+      {{#if cid}}
+        <div class="text-muted small">ID: {{cid}}</div>
+      {{else}}
+        <div class="text-muted small">Tip: agregá un producto y abrí /carts/&lt;cid&gt;.</div>
+      {{/if}}
+    </div>
+    <a class="btn btn-outline-secondary" href="/products">Seguir comprando</a>
+  </div>
+
+  {{#if items.length}}
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th class="text-end">Precio</th>
+                <th class="text-end">Cantidad</th>
+                <th class="text-end">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each items}}
+                <tr>
+                  <td class="fw-semibold">{{this.product.title}}</td>
+                  <td class="text-end">${{this.product.price}}</td>
+                  <td class="text-end">{{this.quantity}}</td>
+                  <td class="text-end">${{this.lineTotal}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="my-3" />
+
+        <div class="d-flex justify-content-end">
+          <div class="h5 mb-0">Total: ${{total}}</div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="alert alert-light border">Este carrito está vacío.</div>
+  {{/if}}
+</div>
+
+<script type="module" src="/js/cart/cartClient.js"></script>

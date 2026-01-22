@@ -4,7 +4,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="d-flex gap-3">
-        <a class="brand-link" href="/">Shop</a>
+        <a class="brand-link" href="/products">Shop</a>
         <a class="brand-link" href="#lookbook">Lookbook</a>
       </div>
 
@@ -14,6 +14,7 @@
         <a class="brand-link" href="/login">Login</a>
         <a class="brand-link" href="/cart">Cart</a>
       </div>
+
     </div>
   </div>
 
@@ -71,7 +72,7 @@
                         <p class="p-name">{{this.title}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="p-price">${{this.price}} ARS</div>
-                          <button class="btn btn-sm btn-dark js-add-to-cart" data-pid="{{this.id}}">
+                          <button class="btn btn-sm btn-dark js-add-to-cart" data-pid="{{this._id}}">
                             Agregar
                           </button>
                         </div>
@@ -100,11 +101,7 @@
     {{/if}}
   </section>
 
-  
-
-
-    <section class="mb-5" id="lookbook">
-
+  <section class="mb-5" id="lookbook">
     <div class="d-flex align-items-end justify-content-between mb-3">
       <div>
         <div class="section-title">LOOKBOOK</div>
@@ -154,11 +151,9 @@
           <div class="tile-label">SWEATER "pepper studio"</div>
         </div>
       </div>
-
-
     </div>
   </section>
 
 </div>
 
-<script type="module" src="/js/cart/cartHome.js"></script>
+<script type="module" src="/js/cart/cartClient.js"></script>
